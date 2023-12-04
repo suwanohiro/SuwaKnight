@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Scene/PopupWindow/PopupWindow.gd" type="Script" id=2]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="Popup" type="Popup" parent="."]
+pause_mode = 2
+visible = true
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Popup"]
+margin_right = 487.0
+margin_bottom = 260.0
+color = Color( 0, 0.109804, 1, 1 )
+
+[node name="Label" type="Label" parent="Popup"]
+margin_left = 204.0
+margin_top = 64.0
+margin_right = 244.0
+margin_bottom = 78.0
+text = "test"
+
+[node name="Button" type="Button" parent="Popup"]
+margin_left = 191.0
+margin_top = 169.0
+margin_right = 237.0
+margin_bottom = 189.0
+text = "close"
+
+[connection signal="pressed" from="Popup/Button" to="." method="_on_Button_pressed"]
