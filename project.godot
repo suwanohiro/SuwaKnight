@@ -23,6 +23,10 @@ _global_script_class_icons={
 config/name="SuwaKnight"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/resizable=false
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
