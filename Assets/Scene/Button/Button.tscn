@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Scene/Button/Button.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Scene/Button/Button_Theme.tres" type="Theme" id=2]
+[ext_resource path="res://Assets/Images/UI/diamond_blue.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Images/UI/light.png" type="Texture" id=4]
+
+[node name="Button" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+_ButtonText = "あいうえお"
+_ButtonColor = 1
+_Position = Vector2( 100, 100 )
+_ButtonSize = Vector2( 200, 40 )
+
+[node name="Button" type="Button" parent="."]
+margin_right = 400.0
+margin_bottom = 40.0
+theme = ExtResource( 2 )
+
+[node name="BackGround" type="TextureRect" parent="."]
+margin_right = 400.0
+margin_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource( 3 )
+stretch_mode = 2
+
+[node name="Light" type="TextureRect" parent="."]
+margin_right = 399.0
+margin_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource( 4 )
+stretch_mode = 1
+
+[node name="ButtonText" type="Label" parent="."]
+margin_right = 400.0
+margin_bottom = 40.0
+theme = ExtResource( 2 )
+text = "ボタン"
+align = 1
+valign = 1
+
+[node name="Border" type="ReferenceRect" parent="."]
+margin_right = 400.0
+margin_bottom = 40.0
+mouse_filter = 2
+border_color = Color( 1, 0.952941, 0.678431, 1 )
+border_width = 3.0
+editor_only = false
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

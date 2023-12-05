@@ -1,13 +1,39 @@
 extends Control
 
-export var _WindowTitle: String = "";
-export var _Message: String = "";
+enum ButtonTypeLabel {
+	None,
+	OK,
+	OK_Cancel,
+	Other
+};
+
+
+################################################################################
+# export
+################################################################################
+
+# ウィンドウタイトル
+export(String) var _WindowTitle: String = "";
+
+# 本文
+export(String, MULTILINE) var _Message: String = "";
 
 # ウィンドウサイズ
 export var _windowSize: Vector2 = Vector2(750, 400);
 
+# ボタンの種類
+export(ButtonTypeLabel) var _ButtonType: int = ButtonTypeLabel.OK;
+
+# ボタンラベル (ボタンの種類でOtherが選ばれた際のみ)
+export(Array, String) var _ButtonLabels;
+
+
+################################################################################
+# 通常メンバ変数
+################################################################################
+
 # ウィンドウ要素
-var _windowElem: Node2D;
+var _windowElem: Control;
 
 # 背景要素
 var _backGroundElem: ColorRect;
@@ -67,7 +93,9 @@ func _setWindowSize() -> void:
 	_backGroundBorder.rect_size = _windowSize;
 	
 	# Title
-	_setWindowSizeTitle();
+	_windowTitleBK.rect_size.x = _windowSize.x;
+	_windowTitleBKBorder.rect_size.x = _windowSize.x;
+	_windowTitleText.rect_size.x = _windowSize.x;
 	
 	# MainContent
 	var titleHeight: float = _windowTitleBK.rect_size.y;
@@ -76,25 +104,13 @@ func _setWindowSize() -> void:
 	_message.rect_size = _windowSize - work;
 	return;
 
-func _setWindowSizeTitle() -> void:
-	_windowTitleBK.rect_size.x = _windowSize.x;
-	_windowTitleBKBorder.rect_size.x = _windowSize.x;
-	_windowTitleText.rect_size.x = _windowSize.x;
-	return;
-
 # ウィンドウ位置を画面中央に設定
 func _setCenterWindowPos():
 	var windowMargin: Vector2 = (rect_size - _windowSize) / 2;
 
 	if (windowMargin < Vector2(0, 0)):
 		windowMargin = Vector2(0, 0);
+		
 
-	_windowElem.position = windowMargin;
+	_windowElem.rect_position = windowMargin;
 	return;
-
-func _debugVector2(title: String, value: Vector2):
-	print(title + " : x(" + str(value.x) + "), y(" + str(value.y) + ")");
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Assets/Images/UI/diamond.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Images/UI/diamond_blue.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Scene/PopupWindow/PopupWindow.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Scene/PopupWindow/Theme/PopupWindowTitle.tres" type="Theme" id=3]
 [ext_resource path="res://Assets/Scene/PopupWindow/Theme/PopupWindowMessage.tres" type="Theme" id=4]
@@ -9,16 +9,24 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": ""
+}
 _WindowTitle = "ポップアップウィンドウ"
 _Message = "本文表示部分"
 
-[node name="Window" type="Node2D" parent="."]
+[node name="Window" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
 
-[node name="BackGround" type="Node2D" parent="Window"]
+[node name="BackGround" type="Control" parent="Window"]
+margin_right = 40.0
+margin_bottom = 40.0
 
 [node name="BackGround" type="ColorRect" parent="Window/BackGround"]
 margin_right = 750.0
 margin_bottom = 400.0
+color = Color( 1, 0.996078, 0.992157, 1 )
 
 [node name="BackGround_Border" type="ReferenceRect" parent="Window/BackGround"]
 margin_right = 750.0
@@ -27,7 +35,9 @@ border_color = Color( 0.968627, 0.811765, 0.45098, 1 )
 border_width = 3.0
 editor_only = false
 
-[node name="TitleElem" type="Node2D" parent="Window"]
+[node name="TitleElem" type="Control" parent="Window"]
+margin_right = 40.0
+margin_bottom = 40.0
 
 [node name="TitleBackGround" type="TextureRect" parent="Window/TitleElem"]
 margin_right = 750.0
@@ -50,14 +60,16 @@ text = "ウィンドウタイトル"
 align = 1
 valign = 1
 
-[node name="MainContent" type="Node2D" parent="Window"]
+[node name="MainContent" type="Control" parent="Window"]
+margin_right = 40.0
+margin_bottom = 40.0
 
 [node name="MainContent" type="ColorRect" parent="Window/MainContent"]
 margin_left = 10.0
 margin_top = 50.0
 margin_right = 740.0
 margin_bottom = 390.0
-color = Color( 0.901961, 0.901961, 0.901961, 1 )
+color = Color( 0.976471, 0.972549, 0.960784, 1 )
 
 [node name="Message" type="Label" parent="Window/MainContent"]
 margin_left = 20.0
@@ -68,3 +80,7 @@ theme = ExtResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "本文"
 autowrap = true
+
+[node name="Buttons" type="Control" parent="Window"]
+margin_right = 40.0
+margin_bottom = 40.0
