@@ -10,10 +10,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 _ButtonText = "あいうえお"
-_Position = Vector2( 100, 100 )
 _ButtonSize = Vector2( 200, 40 )
 
-[node name="Button" type="Button" parent="."]
+[node name="ButtonElem" type="Button" parent="."]
 margin_right = 400.0
 margin_bottom = 40.0
 theme = ExtResource( 2 )
@@ -48,6 +47,6 @@ border_color = Color( 1, 0.952941, 0.678431, 1 )
 border_width = 3.0
 editor_only = false
 
-[connection signal="button_down" from="Button" to="." method="_on_Button_button_down"]
-[connection signal="button_up" from="Button" to="." method="_on_Button_button_up"]
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="button_down" from="ButtonElem" to="." method="_on_Button_button_down"]
+[connection signal="button_up" from="ButtonElem" to="." method="_on_Button_button_up"]
+[connection signal="pressed" from="ButtonElem" to="." method="_on_Button_pressed"]

@@ -1,20 +1,27 @@
 extends Control
 
-# 青ボタンと白ボタンを切り替えれるようにする
+class_name Buttons
 
 enum ButtonColors {
 	Blue,
 	White
 };
 
+################################################################################
+# export
+################################################################################
 export(String) var _ButtonText: String = "";
 export(ButtonColors) var _ButtonColor: int = ButtonColors.Blue;
 export(Vector2) var _Position: Vector2 = Vector2(0, 0);
 export(Vector2) var _ButtonSize: Vector2 = Vector2(80, 40);
 
-var _baseElem: Control;
-var _buttonElem: Button;
+
+################################################################################
+# 通常メンバ変数
+################################################################################
 var _buttonElemMargin: Vector2 = Vector2(3, 3);
+
+var _buttonElem: Button;
 var _backGround: TextureRect;
 var _Light: TextureRect;
 var _buttonTextLabel: Label;
@@ -36,6 +43,19 @@ const _scaleMax: Vector2 = Vector2(1, 1);
 # 拡大/縮小スピード
 const _reductionSpd: float = 0.5;
 
+func Initialize(Text: String, Colors: int, Pos: Vector2, Size: Vector2) -> void:
+	_getNode();
+	
+	_ButtonText = Text;
+	_ButtonColor = Colors;
+	_Position = Pos;
+	_ButtonSize = Size;
+	
+	_ready();
+	return;
+
+func connectEvent():
+	return;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -64,7 +84,7 @@ func _ready():
 
 # ノードを取得する
 func _getNode():
-	_buttonElem = get_node("Button");
+	_buttonElem = get_node("ButtonElem");
 	_backGround = get_node("BackGround");
 	_Light = get_node("Light");
 	_buttonTextLabel = get_node("ButtonText");
@@ -92,7 +112,6 @@ func _process(delta):
 	if (rect_scale < _scaleMin):
 		rect_scale = _scaleMin
 	pass
-
 
 func _on_Button_pressed():
 	print("click!");

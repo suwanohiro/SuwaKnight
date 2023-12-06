@@ -7,7 +7,6 @@ enum ButtonTypeLabel {
 	Other
 };
 
-
 ################################################################################
 # export
 ################################################################################
@@ -65,6 +64,22 @@ func _ready():
 	
 	# 本文を設定
 	_message.text = _Message;
+	
+	#######################
+	# ここからテスト
+	#######################
+	
+	var Buttons = preload("res://Assets/Scene/Button/Button.tscn");
+	var a = Buttons.instance();
+	
+	
+	var asd: Buttons = Buttons.instance();
+	asd.Initialize("test", 0, Vector2(100, 100), Vector2(60, 40));
+	
+	a.set_script(asd);
+	# a.Initialize("test", Buttons.ButtonColors.Blue, Vector2(100, 100), Vector2(60, 40));
+	# add_child(a.getNode());
+	add_child(a);
 	pass
 
 # ノード情報を設定する
