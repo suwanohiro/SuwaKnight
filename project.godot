@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "ButtonColors",
+"language": "GDScript",
+"path": "res://Assets/Scene/Button/ButtonColors.gd"
+}, {
 "base": "Control",
 "class": "Buttons",
 "language": "GDScript",
 "path": "res://Assets/Scene/Button/Button.gd"
 } ]
 _global_script_class_icons={
+"ButtonColors": "",
 "Buttons": ""
 }
 

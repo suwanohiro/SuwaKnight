@@ -71,15 +71,11 @@ func _ready():
 	
 	var Buttons = preload("res://Assets/Scene/Button/Button.tscn");
 	var a = Buttons.instance();
-	
-	
-	var asd: Buttons = Buttons.instance();
-	asd.Initialize("test", 0, Vector2(100, 100), Vector2(60, 40));
-	
-	a.set_script(asd);
-	# a.Initialize("test", Buttons.ButtonColors.Blue, Vector2(100, 100), Vector2(60, 40));
-	# add_child(a.getNode());
-	add_child(a);
+	var b = Buttons.instance();
+	a.Initialize("キャンセル", ButtonColors.Colors.White, Vector2(100, 300), Vector2(240, 40));
+	_windowElem.add_child(a);
+	b.Initialize("OK", ButtonColors.Colors.Blue, Vector2(400, 300), Vector2(240, 40));
+	_windowElem.add_child(b);
 	pass
 
 # ノード情報を設定する
