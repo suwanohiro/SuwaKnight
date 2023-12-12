@@ -18,10 +18,22 @@ _global_script_classes=[ {
 "class": "Buttons",
 "language": "GDScript",
 "path": "res://Assets/Scene/Button/Button.gd"
+}, {
+"base": "Control",
+"class": "Math",
+"language": "GDScript",
+"path": "res://Assets/Module/Math/Math.gd"
+}, {
+"base": "Reference",
+"class": "WebColor",
+"language": "GDScript",
+"path": "res://Assets/Module/WebColor/WebColor.gd"
 } ]
 _global_script_class_icons={
 "ButtonColors": "",
-"Buttons": ""
+"Buttons": "",
+"Math": "",
+"WebColor": ""
 }
 
 [application]

@@ -1,7 +1,6 @@
 extends Control
 
 enum ButtonTypeLabel {
-	None,
 	OK,
 	OK_Cancel,
 	Other
@@ -31,6 +30,9 @@ export(Array, String) var _ButtonLabels;
 # 通常メンバ変数
 ################################################################################
 
+# 背景
+var _allBackGround: ColorRect;
+
 # ウィンドウ要素
 var _windowElem: Control;
 
@@ -48,10 +50,21 @@ var _mainContentMargin: float = 10;
 var _mainContent: ColorRect;
 var _message: Label;
 
+# ボタン要素
+var _Button;
+
+# ボタン要素配列
+var _ButtonList: Array;
+
 # ノードが初めてシーンツリーに入るときに呼び出される。
 func _ready():
 	# 各種要素を取得
-	_setNode();
+	_getNode();
+	
+	_allBackGround.color = "50FFFFFF";
+	
+	# ボタン要素を読み込み
+	_Button = preload("res://Assets/Scene/Button/Button.tscn");
 	
 	# ウィンドウのサイズを全て設定
 	_setWindowSize();
@@ -69,17 +82,20 @@ func _ready():
 	# ここからテスト
 	#######################
 	
-	var Buttons = preload("res://Assets/Scene/Button/Button.tscn");
-	var a = Buttons.instance();
-	var b = Buttons.instance();
-	a.Initialize("キャンセル", ButtonColors.Colors.White, Vector2(100, 300), Vector2(240, 40));
-	_windowElem.add_child(a);
-	b.Initialize("OK", ButtonColors.Colors.Blue, Vector2(400, 300), Vector2(240, 40));
-	_windowElem.add_child(b);
+	var a = _Button.instance();
+	var b = _Button.instance();
+	
+	var size: Vector2 = Vector2(240, 40);
+	
+	a.Initialize("キャンセル", ButtonColors.Colors.White, Vector2(100, 300), size, _windowElem);
+	b.Initialize("OK", ButtonColors.Colors.Blue, Vector2(400, 300), size, _windowElem);
 	pass
 
 # ノード情報を設定する
-func _setNode():
+func _getNode():
+	# 背景
+	_allBackGround = get_node("AllBackGround");
+	
 	# Window
 	_windowElem = get_node("Window");
 	
@@ -124,4 +140,7 @@ func _setCenterWindowPos():
 		
 
 	_windowElem.rect_position = windowMargin;
+	return;
+
+func _makeButton():
 	return;

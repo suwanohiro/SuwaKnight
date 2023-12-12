@@ -15,6 +15,11 @@ __meta__ = {
 _WindowTitle = "ポップアップウィンドウ"
 _Message = "本文表示部分"
 
+[node name="AllBackGround" type="ColorRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+color = Color( 1, 1, 1, 0.643137 )
+
 [node name="Window" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0

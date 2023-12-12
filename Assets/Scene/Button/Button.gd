@@ -68,7 +68,7 @@ const _effectShowTime: float = 0.2;
 # 現在のエフェクト表示時間
 var _effectShowNowTime: float = 0;
 
-func Initialize(Text: String, Colors: int, Pos: Vector2, Size: Vector2) -> void:
+func Initialize(Text: String, Colors: int, Pos: Vector2, Size: Vector2, baseWindow: Control) -> void:
 	_getNode();
 	
 	_ButtonText = Text;
@@ -76,7 +76,8 @@ func Initialize(Text: String, Colors: int, Pos: Vector2, Size: Vector2) -> void:
 	_Position = Pos;
 	_ButtonSize = Size;
 	
-	_ready();
+	# ボタン要素をベースウィンドウに追加
+	baseWindow.add_child(self);
 	return;
 
 func connectEvent():
