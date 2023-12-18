@@ -174,6 +174,7 @@ func _process(delta):
 	
 	pass
 
+
 # エフェクト関連更新処理
 func _process_effect(delta):
 	# エフェクトが非表示なら何も処理をしない

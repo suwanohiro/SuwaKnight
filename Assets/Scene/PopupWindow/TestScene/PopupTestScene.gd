@@ -10,7 +10,7 @@ func _ready():
 	_backGround = get_node("BackGround");
 	
 	# 背景色を指定
-	_backGround.color = WebColor.Lightblue;
+	_backGround.color = WebColor.getColor(WebColor.Lightblue, 50);
 	
 	# ボタン要素を読み込み
 	_Button = preload("res://Assets/Scene/Button/Button.tscn");
@@ -26,13 +26,6 @@ func _ready():
 	
 	var num: float = 100.526;
 	print(num);
-	print(Math.Floor(num));
-	print(Math.DecToHex(255));
 	
 	
 	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

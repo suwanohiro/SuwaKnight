@@ -19,10 +19,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Assets/Scene/Button/Button.gd"
 }, {
+"base": "Reference",
+"class": "EventType",
+"language": "GDScript",
+"path": "res://Assets/Module/EventListener/EventType.gd"
+}, {
 "base": "Control",
 "class": "Math",
 "language": "GDScript",
 "path": "res://Assets/Module/Math/Math.gd"
+}, {
+"base": "Reference",
+"class": "Vector",
+"language": "GDScript",
+"path": "res://Assets/Module/Vector/Vector.gd"
 }, {
 "base": "Reference",
 "class": "WebColor",
@@ -32,7 +42,9 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "ButtonColors": "",
 "Buttons": "",
+"EventType": "",
 "Math": "",
+"Vector": "",
 "WebColor": ""
 }
 

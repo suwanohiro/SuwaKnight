@@ -145,5 +145,6 @@ const Mediumpurple: String = "9370db";
 const Slateblue: String = "6a5acd";
 const Mediumslateblue: String = "7b68ee";
 
-func AddAlpha(alpha: int) -> String:
-	return "";
+static func getColor(color: String, alpha: int = 255) -> String:
+	var alphaStr: String = Math.DecToN(alpha, 16);
+	return alphaStr + color;
