@@ -25,7 +25,6 @@ export(ButtonTypeLabel) var _ButtonType: int = ButtonTypeLabel.OK;
 # ボタンラベル (ボタンの種類でOtherが選ばれた際のみ)
 export(Array, String) var _ButtonLabels;
 
-
 ################################################################################
 # 通常メンバ変数
 ################################################################################
@@ -56,12 +55,29 @@ var _Button;
 # ボタン要素配列
 var _ButtonList: Array;
 
+func popup(
+	windowTitle: String, message: String,
+	windowSize: Vector2, buttonType: int = ButtonTypeLabel.OK,
+	buttonLabels: Array = []
+):
+	_WindowTitle = windowTitle;
+	_Message = message;
+	_windowSize = windowSize;
+	_ButtonType = buttonType;
+	_ButtonLabels = buttonLabels;
+	
+	visible = true;
+	return;
+
 # ノードが初めてシーンツリーに入るときに呼び出される。
 func _ready():
+	# 最初は非表示にする
+	visible = false;
+	
 	# 各種要素を取得
 	_getNode();
 	
-	_allBackGround.color = "50FFFFFF";
+	createShadow();
 	
 	# ボタン要素を読み込み
 	_Button = preload("res://Assets/Scene/Button/Button.tscn");
@@ -90,6 +106,11 @@ func _ready():
 	a.Initialize("キャンセル", ButtonColors.Colors.White, Vector2(100, 300), size, _windowElem);
 	b.Initialize("OK", ButtonColors.Colors.Blue, Vector2(400, 300), size, _windowElem);
 	pass
+
+func createShadow():
+	_allBackGround.color = WebColor.getColor(WebColor.Gray, 128);
+	_allBackGround.rect_size = rect_size;
+	return;
 
 # ノード情報を設定する
 func _getNode():

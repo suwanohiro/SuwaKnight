@@ -80,12 +80,15 @@ func Initialize(Text: String, Colors: int, Pos: Vector2, Size: Vector2, baseWind
 	baseWindow.add_child(self);
 	return;
 
+var _buttonDownEvent: FuncRef = null;
+var _buttonUPEvent: FuncRef = null;
+var _buttonPressedEvent: FuncRef = null;
+
 func connectEvent():
 	_buttonElem.connect("button_down", self, "_on_Button_button_down");
 	_buttonElem.connect("button_up", self, "_on_Button_button_up");
 	_buttonElem.connect("pressed", self, "_on_Button_pressed");
 	return;
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -193,11 +196,17 @@ func _process_effect(delta):
 
 func _on_Button_pressed():
 	print(_ButtonText + " click!");
+	
+	if (_buttonPressedEvent != null):
+		_buttonPressedEvent.call_func();
 	pass
 
 
 func _on_Button_button_down():
 	_isPress = true;
+	
+	if (_buttonDownEvent != null):
+		_buttonDownEvent.call_func();
 	pass # Replace with function body.
 
 
@@ -206,4 +215,23 @@ func _on_Button_button_up():
 	
 	# エフェクトを表示する
 	_effects.visible = true;
+	
+	if (_buttonUPEvent != null):
+		_buttonUPEvent.call_func();
 	pass # Replace with function body.
+
+############################################################
+# イベント処理設定
+############################################################
+
+func setBtnDownEvent(event: FuncRef) -> void:
+	_buttonDownEvent = event;
+	return;
+
+func setBtnUPEvent(event: FuncRef) -> void:
+	_buttonUPEvent = event;
+	return;
+
+func setBtnPressedEvent(event: FuncRef) -> void:
+	_buttonPressedEvent = event;
+	return;

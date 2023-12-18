@@ -4,13 +4,15 @@ var _Button;
 
 var _backGround: ColorRect;
 
+func test():
+	print("押されたよ");
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_backGround = get_node("BackGround");
 	
 	# 背景色を指定
-	_backGround.color = WebColor.getColor(WebColor.Lightblue, 50);
+	_backGround.color = WebColor.getColor(WebColor.Lightblue);
 	
 	# ボタン要素を読み込み
 	_Button = preload("res://Assets/Scene/Button/Button.tscn");
