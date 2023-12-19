@@ -1,10 +1,17 @@
 extends Control
 
 enum ButtonTypeLabel {
-	OK,
-	OK_Cancel,
-	Other
+	OK = 1,
+	OK_Cancel = 2,
+	Cancel = 2
+	Other = 3
 };
+
+enum HAlign {
+	Left,
+	Center,
+	Right
+}
 
 ################################################################################
 # export
@@ -19,16 +26,28 @@ export(String, MULTILINE) var _Message: String = "";
 # ウィンドウサイズ
 export var _windowSize: Vector2 = Vector2(750, 400);
 
+# ボタン配置
+export(HAlign) var _ButtonAlign: int = HAlign.Right;
+
 # ボタンの種類
 export(ButtonTypeLabel) var _ButtonType: int = ButtonTypeLabel.OK;
 
 # ボタンラベル (ボタンの種類でOtherが選ばれた際のみ)
-export(Array, String) var _ButtonLabels;
+export(Array, String) var _ButtonLabels: Array;
 
 ################################################################################
 # 通常メンバ変数
 ################################################################################
 
+# ボタン要素
+var _Button;
+
+# ボタン要素配列
+var _ButtonList: Array;
+
+################################################################################
+# ノード関連
+################################################################################
 # 背景
 var _allBackGround: ColorRect;
 
@@ -49,12 +68,6 @@ var _mainContentMargin: float = 10;
 var _mainContent: ColorRect;
 var _message: Label;
 
-# ボタン要素
-var _Button;
-
-# ボタン要素配列
-var _ButtonList: Array;
-
 func popup(
 	windowTitle: String, message: String,
 	windowSize: Vector2, buttonType: int = ButtonTypeLabel.OK,
@@ -72,12 +85,12 @@ func popup(
 # ノードが初めてシーンツリーに入るときに呼び出される。
 func _ready():
 	# 最初は非表示にする
-	visible = false;
+	# visible = false;
 	
 	# 各種要素を取得
 	_getNode();
 	
-	createShadow();
+	_createShadow();
 	
 	# ボタン要素を読み込み
 	_Button = preload("res://Assets/Scene/Button/Button.tscn");
@@ -97,20 +110,54 @@ func _ready():
 	#######################
 	# ここからテスト
 	#######################
-	
-	var a = _Button.instance();
-	var b = _Button.instance();
-	
-	var size: Vector2 = Vector2(240, 40);
-	
-	a.Initialize("キャンセル", ButtonColors.Colors.White, Vector2(100, 300), size, _windowElem);
-	b.Initialize("OK", ButtonColors.Colors.Blue, Vector2(400, 300), size, _windowElem);
+	_createButton();
 	pass
 
-func createShadow():
+func _createShadow():
 	_allBackGround.color = WebColor.getColor(WebColor.Gray, 128);
 	_allBackGround.rect_size = rect_size;
 	return;
+
+func _createButton():
+	# ボタンラベル
+	var buttonLabel: Array;
+	buttonLabel.push_front("*OK");
+	
+	if (_ButtonType == ButtonTypeLabel.OK_Cancel):
+		buttonLabel.push_front("キャンセル");
+	if (_ButtonType == ButtonTypeLabel.Other):
+		# インスペクターで定義したラベル名をそのまま代入
+		buttonLabel = _ButtonLabels;
+	
+	for cnt in range(buttonLabel.size()):
+		var work = _createButtonInstance(buttonLabel[cnt], Vector2(100 + 300 * cnt, 300));
+		_ButtonList.push_back(work);
+		continue;
+	return;
+
+func _createButtonInstance(label: String, pos: Vector2):
+	var size: Vector2 = Vector2(240, 40);
+	
+	var work = _Button.instance();
+		
+	# ボタンの色を設定
+	var buttonColor: int = ButtonColors.Colors.White;
+	
+	# 文字列先頭に[*]があるかどうかの正規表現
+	var regex = RegEx.new();
+	regex.compile("^[*]");
+	
+	# 文字列先頭に[*]があれば青ボタン
+	if (regex.search(label)):
+		buttonColor = ButtonColors.Colors.Blue;
+
+		# 識別用文字を削除
+		label = regex.sub(label, "");
+		pass
+
+	work.Initialize(label, buttonColor, pos, size, _windowElem);
+
+	return work;
 
 # ノード情報を設定する
 func _getNode():
@@ -163,5 +210,15 @@ func _setCenterWindowPos():
 	_windowElem.rect_position = windowMargin;
 	return;
 
-func _makeButton():
+################################################################################
+# イベント処理設定
+################################################################################
+
+func setBtnDownEvent(target: int, event: FuncRef) -> void:
+	return;
+
+func setBtnUPEvent(target: int, event: FuncRef) -> void:
+	return;
+
+func setBtnPressedEvent(target: int, event: FuncRef) -> void:
 	return;
