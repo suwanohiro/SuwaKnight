@@ -8,11 +8,37 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Character",
+"language": "GDScript",
+"path": "res://Assets/Script/Character.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://Assets/Script/Enemy.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Assets/Script/Player.gd"
+} ]
+_global_script_class_icons={
+"Character": "",
+"Enemy": "",
+"Player": ""
+}
+
 [application]
 
 config/name="SuwaKnight"
 run/main_scene="res://Assets/Window/Game.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Grobal="*res://Assets/Script/Grobal.gd"
 
 [gui]
 
@@ -63,6 +89,15 @@ ui_act2={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":76,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="PlayerBody"
+2d_physics/layer_2="EnemyBody"
+2d_physics/layer_3="PlayerDamage"
+2d_physics/layer_4="EnemyDamage"
+2d_physics/layer_5="Ghost"
+2d_physics/layer_6="Item"
 
 [locale]
 

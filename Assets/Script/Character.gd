@@ -1,6 +1,9 @@
 extends KinematicBody2D
 
 
+
+class_name Character
+
 enum State {
 	Wait,
 	Idle,
@@ -34,33 +37,31 @@ static func get_state_name(state : int) -> String:
 #end func
 
 #onready var [param_name] = $[object_name]
+
 onready var anim = $Anim
 
 var state_anim = -1
 
 
-var key_up : bool
-var key_down : bool
-var key_left : bool
-var key_right : bool
-var key_act0 : bool
-var key_act1 : bool
-var key_act2 : bool
+enum key_code{
+	up,
+	down,
+	left,
+	right,
+	act0,
+	act1,
+	act2,
+	count,
+}
+
+var keys = [false, false, false, false, false, false, false]
+
 
 var speed : float
 var velocity : Vector2
+var damage : Resource = null
 
 
-
-func change_state(state : int) ->bool:
-	if state_anim == state:
-		return false
-	#end if
-	
-	anim.play(get_state_name(state))
-	state_anim = state
-	return true
-#end func
 
 #Called when the node enters the scene tree for the first time.
 func _ready():
@@ -78,10 +79,17 @@ func _process(delta):
 			change_state(State.Wait)
 		#end if
 	#end if
+	input_init()
 	input()
-	if key_act0 or key_act1 or key_act2:
-		change_state(State.Attack)
-	#end if
+	for i in range(3):
+		var code = key_code.act0
+		code += i
+		if keys[code]:
+			_attack(i)
+			break
+		#end if
+	#end for
+
 	_calc_velocity()
 	if velocity.x != 0:
 		var left := velocity.x < 0
@@ -90,6 +98,7 @@ func _process(delta):
 		#end if
 	#end if
 #end func
+
 
 func _physics_process(delta):
 	if velocity.x != 0 or velocity.y != 0:
@@ -100,36 +109,67 @@ func _physics_process(delta):
 			change_state(State.Wait)
 		#end if
 	#end if
+	
+	
+	
+#end func
+
+
+func change_state(state : int) ->bool:
+	if state_anim == state:
+		return false
+	#end if
+	
+	anim.play(get_state_name(state))
+	state_anim = state
+	return true
+#end func
+
+
+func input_init():
+	for i in range(key_code.count):
+		keys[i] = false
+	pass
 #end func
 
 
 func input():
-	key_left = Input.is_action_pressed("ui_left")
-	key_right = Input.is_action_pressed("ui_right")
-	key_up = Input.is_action_pressed("ui_up")
-	key_down = Input.is_action_pressed("ui_down")
-	key_act0 = Input.is_action_pressed("ui_act0")
-	key_act1 = Input.is_action_pressed("ui_act1")
-	key_act2 = Input.is_action_pressed("ui_act2")
+	pass
 #end func
 
 func _calc_velocity():
 	velocity.x = 0
 	velocity.y = 0
-	if key_left != key_right :
+	if keys[key_code.left] != keys[key_code.right] :
 		var accele : float = speed
-		if key_left :
+		if keys[key_code.left] :
 			accele *= -1
 		#end if
 		velocity.x += accele
 	#end if
-	if key_up != key_down :
+	if keys[key_code.up] != keys[key_code.down] :
 		var accele : float = speed
-		if key_up :
+		if keys[key_code.up] :
 			accele *= -1
 		#end if
 		velocity.y += accele
 	#end if
 #end func
+
+
+func _attack(code : int):
+	change_state(State.Attack)
+
+	if damage == null:
+		return
+	#end if
+
+	##Error!
+	#var d = damage.instantiate()
+	#d.damage = 1
+	#d.position = position
+	pass
+#end func
+
 
 
