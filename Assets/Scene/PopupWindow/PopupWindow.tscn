@@ -14,6 +14,8 @@ __meta__ = {
 }
 _WindowTitle = "ポップアップウィンドウ"
 _Message = "本文表示部分"
+_ButtonType = 3
+_ButtonLabels = [ "*あ", "い", "う", "え" ]
 
 [node name="AllBackGround" type="ColorRect" parent="."]
 margin_right = 40.0

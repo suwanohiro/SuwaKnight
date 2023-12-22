@@ -130,7 +130,15 @@ func _createButton():
 		buttonLabel = _ButtonLabels;
 	
 	for cnt in range(buttonLabel.size()):
-		var work = _createButtonInstance(buttonLabel[cnt], Vector2(100 + 300 * cnt, 300));
+		var btnPos: Vector2 = Vector2(100 + 300 * cnt, 300);
+
+		if (_ButtonAlign == HAlign.Left):
+			btnPos = Vector2(100 + 300 * cnt, 300);
+		elif (_ButtonAlign == HAlign.Center):
+			pass
+		
+		
+		var work = _createButtonInstance(buttonLabel[cnt], btnPos);
 		_ButtonList.push_back(work);
 		continue;
 	return;

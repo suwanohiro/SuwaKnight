@@ -21,6 +21,7 @@ func _ready():
 	
 	var _btn1 = _Button.instance();
 	_btn1.Initialize("1ボタン", ButtonColors.Colors.Blue, Vector2(100, 100), size, self);
+	_btn1.setBtnDownEvent(funcref(self, "test"));
 	
 	var _btn2 = _Button.instance();
 	_btn2.Initialize("2ボタン", ButtonColors.Colors.White, Vector2(400, 100), size, self);
